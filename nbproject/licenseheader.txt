@@ -1,0 +1,7 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+Creado: ${date} , Hora: ${time}
+<#if licenseLast??>
+${licenseLast}
+</#if>
