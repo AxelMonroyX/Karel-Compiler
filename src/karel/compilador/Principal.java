@@ -33,8 +33,15 @@ public class Principal extends javax.swing.JFrame {
         jButton_Seleccionar_Archivo = new javax.swing.JButton();
         jLabel_Nombre_archivo = new javax.swing.JLabel();
         jLabel_Texto_Archivo = new javax.swing.JLabel();
+        jButton_AnalizarLexico = new javax.swing.JButton();
+        jButton_AnalizarSintaxis = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jButton_Seleccionar_Archivo.setText("Seleccionar archivo");
         jButton_Seleccionar_Archivo.addActionListener(new java.awt.event.ActionListener() {
@@ -47,6 +54,18 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel_Texto_Archivo.setText("Archivo: ");
 
+        jButton_AnalizarLexico.setText("Analizar Léxico");
+
+        jButton_AnalizarSintaxis.setText("Analizar Sintaxis");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane3.setViewportView(jTextArea3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -56,9 +75,22 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel_Texto_Archivo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_Nombre_archivo)
-                .addGap(77, 77, 77)
+                .addGap(151, 151, 151)
                 .addComponent(jButton_Seleccionar_Archivo)
-                .addContainerGap(346, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton_AnalizarLexico)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_AnalizarSintaxis)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(493, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(218, 218, 218))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(483, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,8 +98,17 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Nombre_archivo)
                     .addComponent(jLabel_Texto_Archivo)
-                    .addComponent(jButton_Seleccionar_Archivo))
-                .addContainerGap(390, Short.MAX_VALUE))
+                    .addComponent(jButton_Seleccionar_Archivo)
+                    .addComponent(jButton_AnalizarSintaxis)
+                    .addComponent(jButton_AnalizarLexico))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(32, 32, 32)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(21, Short.MAX_VALUE)))
         );
 
         pack();
@@ -130,9 +171,15 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_AnalizarLexico;
+    private javax.swing.JButton jButton_AnalizarSintaxis;
     private javax.swing.JButton jButton_Seleccionar_Archivo;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel_Nombre_archivo;
     private javax.swing.JLabel jLabel_Texto_Archivo;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     // End of variables declaration//GEN-END:variables
 }
