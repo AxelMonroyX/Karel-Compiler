@@ -1,0 +1,48 @@
+beginning-of-program //INICIO DEL PROGRAMA
+    define-new-instruction Identifier (d) as
+        turnoff;
+
+    external  ID2(a);
+    external  ID2;
+    external  ID2(a) using "String";
+    external  ID2 using "String";
+
+    define-new-instruction a15 as
+        turnoff;/*Este es un comentario de doble linea multiple
+        puede continuar este comentario o tambien puedo hacer otro tipo de comentario simples
+        */
+
+    beginning-of-execution
+        //Sentencia de bloque simple, debe tener almenos una instruccion contenida
+        turnoff;
+        begin
+            turnoff;
+        end;
+        //Sentencia de bloque con varias sentencias
+        begin
+            turnoff;
+            pickbeeper;
+        end;
+        //If simple 
+        if  right-is-clear
+        then    pickbeeper;
+
+        //Ejemplo de un if con una sentencia iterate contenida
+        if (iszero(15)) or right-is-clear
+        then 
+            iterate 15 times pickbeeper; 
+        else 
+            pickbeeper;
+
+         pickbeeper;
+        //While 
+        while not front-is-clear do 
+            pickbeeper;
+        iterate 15 times 
+            pickbeeper;
+
+        axerosad(11); //Call statement
+        pickbeeper;
+
+    end-of-execution
+end-of-program  //FIN DEL PROGRAMA
