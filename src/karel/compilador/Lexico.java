@@ -4,6 +4,7 @@
 package karel.compilador;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -105,6 +106,12 @@ String palReservadas[][]={
     public Lexico() throws FileNotFoundException, IOException {
  trabajarLexico();
     }//public LEXICO
+
+    Lexico(File archivo) throws IOException {
+        this.archivo=archivo.getPath();
+        //System.out.println(archivo.getPath());
+        trabajarLexico();
+    }
 
     private void trabajarLexico() throws FileNotFoundException, IOException {
         FileReader file = new FileReader(archivo);
