@@ -41,7 +41,8 @@ beginning-of-program //INICIO DEL PROGRAMA
         iterate 15 times 
             pickbeeper;
 
-        axerosad(11); //Call statement
+        axerosad(0); //Call statement
+        llamada;
         pickbeeper;
 
     end-of-execution

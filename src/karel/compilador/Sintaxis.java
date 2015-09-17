@@ -40,7 +40,8 @@ class Sintaxis {
         /*23*/ {"Call statement mal formado  ", "523"}
 
     };
-
+    String SemanticaDefineNewInstruction[][];
+    
     private void ImprimirError(int errorIdentificado) {
 
         for (int i = 0; i < errores.length; i++) {
@@ -122,8 +123,10 @@ class Sintaxis {
             p = p.sig;
             if (p.token == 101) { // id
                 p = p.sig;
+                //Linea de semantica Error 600 define-new-instruction opcion #2
                 if (p.token == 204) {// as
                     p = p.sig;
+                    //Linea de semantica
                     if (identificarStatement()) {
                         //p = p.sig;
                         return true;
@@ -137,6 +140,7 @@ class Sintaxis {
                             p = p.sig;
                             if (p.token == 104) {//)
                                 p = p.sig;
+                                //Linea de semantica Error 600 define-new-instruction opcion #1
                                 if (p.token == 204) {// as
                                     p = p.sig;
                                     if (identificarStatement()) {
@@ -162,6 +166,7 @@ class Sintaxis {
 
     private boolean idetificarMethod_Link_Declarations() {
         if (p.token == 203) { //define-new-instruction
+            //Linea de semantica Error 600
             if (identificarMethodDeclaration()) {
                 if (p.token == 105) {  // ;
                     nodo aux = p.sig;
@@ -187,6 +192,7 @@ class Sintaxis {
         }
         if (p.token == 205) { //external
             //p = p.sig;
+            //Linea de semantica Error 601
             if (identificarLinkDeclaration()) {
                 if (p.token == 105) {  // ;
                     p = p.sig;
@@ -215,6 +221,7 @@ class Sintaxis {
             if (p.token == 101) { // id
                 p = p.sig;
                 if (p.token == 105) { //;
+                    //Linea de semantica Error 601 external opcion #1
                     return true;
                 } else {
                     if (p.token == 103) {//(
@@ -224,6 +231,7 @@ class Sintaxis {
                             if (p.token == 104) { // )
                                 p = p.sig;
                                 if (p.token == 105) { //;
+                                    //Linea de semantica Error 601 external opcion #3
                                     return true;
                                 } else {
                                     if (p.token == 206) { //using
@@ -231,6 +239,7 @@ class Sintaxis {
                                         if (p.token == 106) { //string
                                             p = p.sig;
                                             if (p.token == 105) { //;
+                                                //Linea de semantica Error 601 external opcion #4
                                                 return true;
                                             }
                                         }
@@ -244,6 +253,7 @@ class Sintaxis {
                             if (p.token == 106) {//string
                                 p = p.sig;
                                 if (p.token == 105) { //;
+                                    //Linea de semantica Error 601 external opcion #2
                                     return true;
                                 }
                             }
@@ -574,8 +584,10 @@ class Sintaxis {
 
     private boolean identificarCall_Statement() {
         if (p.token == 101) { //id
+            //Linea de semantica Error 602
             p = p.sig;
             if (p.token == 105) { // ;
+                //Linea de semantica Error 602 Call Statement opcion #2
                 return true;
             } else {
                 if (p.token == 103) { // (
@@ -585,6 +597,7 @@ class Sintaxis {
                         if (p.token == 104) { // )
                             p = p.sig;
                             if (p.token == 105) { //;
+                                //Linea de semantica Error 602 Call Statement opcion #1
                                 return true;
                             }
                         }
