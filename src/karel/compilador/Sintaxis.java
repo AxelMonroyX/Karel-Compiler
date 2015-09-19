@@ -4,6 +4,8 @@
 package karel.compilador;
 
 import javax.swing.JOptionPane;
+import karel.compilador.Semantica.Lista_nodo_define_new_instruction;
+//import karel.compilador.Semantica.nodo_define_new_instruction;
 
 /**
  *
@@ -37,19 +39,22 @@ class Sintaxis {
         /*20*/ {"If statement mal formado  ", "520"},
         /*21*/ {"While statement mal formado  ", "521"},
         /*22*/ {"Iterate statement mal formado  ", "522"},
-        /*23*/ {"Call statement mal formado  ", "523"}
+        /*23*/ {"Call statement mal formado  ", "523"},
+            //Errores de Semantica
+        /*602*/ {"Verifica que la instrucción haya sido declarada anteriormente con define-new-instruction","602"}
+            
 
     };
-    String SemanticaDefineNewInstruction[][];
-    
+    Lista_nodo_define_new_instruction Lista_new_instructions = new Lista_nodo_define_new_instruction();
+
     private void ImprimirError(int errorIdentificado) {
 
         for (int i = 0; i < errores.length; i++) {
             if (errorIdentificado == Integer.valueOf(errores[i][1])) {
                 String color = "\u001B[31m";
-                String mensaje=( "Error:     " + errores[i][0] + "    " + errores[i][1] + "  EN EL RENGLON     " + p.num_renglon);
-                System.out.println(color+mensaje);
-                JOptionPane.showMessageDialog(null, mensaje, "Sintaxis",1);
+                String mensaje = ("Error:     " + errores[i][0] + "    " + errores[i][1] + "  EN EL RENGLON     " + p.num_renglon);
+                System.out.println(color + mensaje);
+                JOptionPane.showMessageDialog(null, mensaje, "Sintaxis", 1);
                 //error_encontrado=true;
             }
         }
@@ -63,13 +68,12 @@ class Sintaxis {
         if (identificarProgramDeclaration()) {
             System.out.println("Sintaxis correcta");
             JOptionPane.showMessageDialog(null, "Sintaxis Correcta");
-        }else{
-           
+        } else {
+
             JOptionPane.showMessageDialog(null, "Sintaxis Incorrecta");
         }
 
         //System.out.println("Ultimo Nodo: \t\t\t" + p.lexema + " \t\t" + p.token + " \t\t" + p.num_renglon);
-
     }
 
     private boolean identificarProgramBody() {
@@ -119,14 +123,19 @@ class Sintaxis {
     }
 
     private boolean identificarMethodDeclaration() {
+        nodo aux3 = p;
         if (p.token == 203) {//define-new-instruction
             p = p.sig;
             if (p.token == 101) { // id
+                aux3 = p;
                 p = p.sig;
                 //Linea de semantica Error 600 define-new-instruction opcion #2
                 if (p.token == 204) {// as
+                    Lista_new_instructions.Insertar_Nodo_Final(aux3.lexema, false);
+                    //Lista_new_instructions.Mostrar();
+                    //nodo_Semantica.insertarNodo(aux3.lexema, false);
+                    System.out.println("Insertar nodo");
                     p = p.sig;
-                    //Linea de semantica
                     if (identificarStatement()) {
                         //p = p.sig;
                         return true;
@@ -140,7 +149,8 @@ class Sintaxis {
                             p = p.sig;
                             if (p.token == 104) {//)
                                 p = p.sig;
-                                //Linea de semantica Error 600 define-new-instruction opcion #1
+                                Lista_new_instructions.Insertar_Nodo_Final(aux3.lexema, true);
+                                //nodo_Semantica.insertarNodo(aux3.lexema, true);
                                 if (p.token == 204) {// as
                                     p = p.sig;
                                     if (identificarStatement()) {
@@ -270,7 +280,7 @@ class Sintaxis {
             //p = p.sig;
             if (identificarBlock_Statement()) {
                 return true;
-            }else{
+            } else {
                 ImprimirError(519);
             }
         }
@@ -278,7 +288,7 @@ class Sintaxis {
             //p = p.sig;
             if (identificarIf_Statement()) {
                 return true;
-            }else{
+            } else {
                 ImprimirError(520);
             }
         }
@@ -286,7 +296,7 @@ class Sintaxis {
             //p = p.sig;
             if (identificarWhile_Statement()) {
                 return true;
-            }else{
+            } else {
                 ImprimirError(521);
             }
         }
@@ -294,7 +304,7 @@ class Sintaxis {
             //p = p.sig;
             if (identificarIterate_Statement()) {
                 return true;
-            }else{
+            } else {
                 ImprimirError(522);
             }
         }
@@ -332,7 +342,7 @@ class Sintaxis {
             //p = p.sig;
             if (identificarCall_Statement()) {
                 return true;
-            }else{
+            } else {
                 ImprimirError(523);
             }
         }
@@ -415,7 +425,7 @@ class Sintaxis {
                                     return true;
                                 }
                             } else {
-                                
+
                                 return true;
                             }
                         }
@@ -583,10 +593,16 @@ class Sintaxis {
     }
 
     private boolean identificarCall_Statement() {
+        nodo aux4 = p;
         if (p.token == 101) { //id
             //Linea de semantica Error 602
+            aux4 = p;
             p = p.sig;
             if (p.token == 105) { // ;
+                if (!Lista_new_instructions.nodoEncontrado(aux4.lexema, false)) {
+                    ImprimirError(602);
+                }
+
                 //Linea de semantica Error 602 Call Statement opcion #2
                 return true;
             } else {
@@ -609,4 +625,3 @@ class Sintaxis {
     }
 
 }
-

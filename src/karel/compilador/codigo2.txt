@@ -39,6 +39,7 @@ while not front-is-clear do pickbeeper;
 iterate 15 times pickbeeper;
 
 axerosad(11); //Call statement
+asdd;
 pickbeeper;
 
 end-of-execution

@@ -7,13 +7,13 @@ package karel.compilador.Semantica;
  *
  * @author axelmonroyx
  */
-class nodo_define_new_instruction {
+public class nodo_define_new_instruction {
 
     String lexema;
     boolean parametro;
     nodo_define_new_instruction sig = null;
 
-    nodo_define_new_instruction(String lexema, boolean parametro) {
+    public nodo_define_new_instruction(String lexema, boolean parametro) {
         this.lexema = lexema;
         this.parametro = parametro;
     }
