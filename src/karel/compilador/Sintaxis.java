@@ -5,6 +5,7 @@ package karel.compilador;
 
 import javax.swing.JOptionPane;
 import karel.compilador.Semantica.Lista_nodo_define_new_instruction;
+import karel.compilador.Semantica.Lista_nodo_external;
 //import karel.compilador.Semantica.nodo_define_new_instruction;
 
 /**
@@ -47,6 +48,7 @@ class Sintaxis {
 
     };
     Lista_nodo_define_new_instruction Lista_new_instructions = new Lista_nodo_define_new_instruction();
+    Lista_nodo_external Lista_externals = new Lista_nodo_external();
 
     private void ImprimirError(int errorIdentificado) {
 
@@ -69,7 +71,8 @@ class Sintaxis {
         if (identificarProgramDeclaration()) {
             System.out.println("Sintaxis correcta");
             JOptionPane.showMessageDialog(null, "Sintaxis Correcta");
-            Lista_new_instructions.Mostrar();
+            //Lista_new_instructions.Mostrar();
+            Lista_externals.Mostrar();
         } else {
 
             JOptionPane.showMessageDialog(null, "Sintaxis Incorrecta");
@@ -237,11 +240,18 @@ class Sintaxis {
     }
 
     private boolean identificarLinkDeclaration() {
+        nodo aux5 = p;
         if (p.token == 205) { //external
             p = p.sig;
             if (p.token == 101) { // id
+                aux5 = p;
                 p = p.sig;
                 if (p.token == 105) { //;
+                    if (Lista_externals.nodoEncontrado(aux5.lexema, false, false)) {
+                        ImprimirError(601);
+                    } else {
+                        Lista_externals.Insertar_Nodo_Final(aux5.lexema, false, false);
+                    }
                     //Linea de semantica Error 601 external opcion #1
                     return true;
                 } else {
@@ -253,6 +263,11 @@ class Sintaxis {
                                 p = p.sig;
                                 if (p.token == 105) { //;
                                     //Linea de semantica Error 601 external opcion #3
+                                    if (Lista_externals.nodoEncontrado(aux5.lexema, true, false)) {
+                                        ImprimirError(601);
+                                    } else {
+                                        Lista_externals.Insertar_Nodo_Final(aux5.lexema, true, false);
+                                    }
                                     return true;
                                 } else {
                                     if (p.token == 206) { //using
@@ -261,6 +276,11 @@ class Sintaxis {
                                             p = p.sig;
                                             if (p.token == 105) { //;
                                                 //Linea de semantica Error 601 external opcion #4
+                                                if (Lista_externals.nodoEncontrado(aux5.lexema, true, true)) {
+                                                    ImprimirError(601);
+                                                } else {
+                                                    Lista_externals.Insertar_Nodo_Final(aux5.lexema, true, true);
+                                                }
                                                 return true;
                                             }
                                         }
@@ -274,6 +294,11 @@ class Sintaxis {
                             if (p.token == 106) {//string
                                 p = p.sig;
                                 if (p.token == 105) { //;
+                                    if (Lista_externals.nodoEncontrado(aux5.lexema, false, true)) {
+                                        ImprimirError(601);
+                                    } else {
+                                        Lista_externals.Insertar_Nodo_Final(aux5.lexema, false, true);
+                                    }
                                     //Linea de semantica Error 601 external opcion #2
                                     return true;
                                 }

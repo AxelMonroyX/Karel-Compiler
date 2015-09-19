@@ -4,15 +4,18 @@ Identifier (d) as
 turnoff;
 
 external  ID2(a);
-external  ID2;
-external  ID2(a) using "String";
-external  ID2 using "String";
+external  ID235;
+external  ID23(a) using "String";
+external  ID2asd using "String";
 
 define-new-instruction
 a15 as
 turnoff;/*Este es un comentario de doble linea multiple
 puede continuar este comentario o tambien puedo hacer otro tipo de comentario simples
 */
+define-new-instruction
+a15(a) as
+turnoff;
 
 beginning-of-execution
 //Sentencia de bloque simple, debe tener almenos una instruccion contenida
@@ -40,6 +43,7 @@ iterate 15 times pickbeeper;
 
 
 a15;
+a15(2);
 Identifier(5);
 
 end-of-execution
