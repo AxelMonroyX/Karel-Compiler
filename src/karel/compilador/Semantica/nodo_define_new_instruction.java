@@ -7,7 +7,7 @@ package karel.compilador.Semantica;
  *
  * @author axelmonroyx
  */
-public class nodo_define_new_instruction {
+class nodo_define_new_instruction {
 
     String lexema;
     boolean parametro;

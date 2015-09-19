@@ -90,19 +90,23 @@ public class Lista_nodo_define_new_instruction {
     }
 
     //Metodo para buscar en la lista de inicion a fin
-    public boolean nodoEncontrado(String lexema, boolean parametro) {
+    public boolean nodoEncontrado(String xlexema, boolean xparametro) {
+        boolean encontrado=false;
         if (!Lista_nodo_define_new_instructionVacia()) {
             nodo_define_new_instruction Actual = Pri;
-            boolean encontrado=false;
-            while (Actual != null && encontrado==true) {
-                if (Actual.lexema == lexema && Actual.parametro == parametro) {
-                    encontrado=true;
-                    return true;
+            
+            while (Actual != null ) {
+                
+                if (Actual.lexema.equals(xlexema)) {
+                    if (Actual.parametro==xparametro) {
+                        encontrado=true;
+                        break;
+                    }
                 }
                 Actual = Actual.sig;
             }
 
         }
-        return false;
+        return encontrado;
     }
 }

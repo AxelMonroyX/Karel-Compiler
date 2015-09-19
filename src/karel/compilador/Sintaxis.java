@@ -40,9 +40,10 @@ class Sintaxis {
         /*21*/ {"While statement mal formado  ", "521"},
         /*22*/ {"Iterate statement mal formado  ", "522"},
         /*23*/ {"Call statement mal formado  ", "523"},
-            //Errores de Semantica
-        /*602*/ {"Verifica que la instrucción haya sido declarada anteriormente con define-new-instruction","602"}
-            
+        //Errores de Semantica
+        /*600*/ {"Verificar que no exista una instrucción ya declarada con el mismo nombre", "600"},
+        /*601*/ {"Verificar que no exista otra linea de external con el mismo identificador", "601"},
+        /*602*/ {"Verifica que la instrucción haya sido declarada anteriormente con define-new-instruction", "602"}
 
     };
     Lista_nodo_define_new_instruction Lista_new_instructions = new Lista_nodo_define_new_instruction();
@@ -68,6 +69,7 @@ class Sintaxis {
         if (identificarProgramDeclaration()) {
             System.out.println("Sintaxis correcta");
             JOptionPane.showMessageDialog(null, "Sintaxis Correcta");
+            Lista_new_instructions.Mostrar();
         } else {
 
             JOptionPane.showMessageDialog(null, "Sintaxis Incorrecta");
@@ -131,9 +133,13 @@ class Sintaxis {
                 p = p.sig;
                 //Linea de semantica Error 600 define-new-instruction opcion #2
                 if (p.token == 204) {// as
-                    Lista_new_instructions.Insertar_Nodo_Final(aux3.lexema, false);
-                    //Lista_new_instructions.Mostrar();
-                    //nodo_Semantica.insertarNodo(aux3.lexema, false);
+                    //Semantica
+                    if (Lista_new_instructions.nodoEncontrado(aux3.lexema, false)) {
+                        ImprimirError(600);
+                    } else {
+                        Lista_new_instructions.Insertar_Nodo_Final(aux3.lexema, false);
+                    }
+
                     System.out.println("Insertar nodo");
                     p = p.sig;
                     if (identificarStatement()) {
@@ -149,8 +155,13 @@ class Sintaxis {
                             p = p.sig;
                             if (p.token == 104) {//)
                                 p = p.sig;
-                                Lista_new_instructions.Insertar_Nodo_Final(aux3.lexema, true);
-                                //nodo_Semantica.insertarNodo(aux3.lexema, true);
+                                //Semantica
+                                if (Lista_new_instructions.nodoEncontrado(aux3.lexema, true)) {
+                                    ImprimirError(600);
+                                } else {
+                                    Lista_new_instructions.Insertar_Nodo_Final(aux3.lexema, true);
+                                }
+
                                 if (p.token == 204) {// as
                                     p = p.sig;
                                     if (identificarStatement()) {
@@ -613,6 +624,9 @@ class Sintaxis {
                         if (p.token == 104) { // )
                             p = p.sig;
                             if (p.token == 105) { //;
+                                if (!Lista_new_instructions.nodoEncontrado(aux4.lexema, true)) {
+                                    ImprimirError(602);
+                                }
                                 //Linea de semantica Error 602 Call Statement opcion #1
                                 return true;
                             }

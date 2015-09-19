@@ -38,9 +38,9 @@ then iterate 15 times pickbeeper; else pickbeeper;
 while not front-is-clear do pickbeeper;
 iterate 15 times pickbeeper;
 
-axerosad(11); //Call statement
-asdd;
-pickbeeper;
+
+a15;
+Identifier(5);
 
 end-of-execution
 end-of-program  //FIN DEL PROGRAMA
