@@ -58,7 +58,7 @@ public class Lista_nodo_define_new_instruction {
         if (Lista_nodo_define_new_instructionVacia()) {
             System.out.println("La " + Nom + " esta vacia");
         }
-
+        System.out.println("Lexema"+"\t"+"Parametro");
         while (Actual != null) {
             System.out.print(Actual.lexema);
             System.out.print("\t");

@@ -18,7 +18,6 @@ public class ImpresionNodos extends javax.swing.JFrame {
         initComponents();
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,6 +29,10 @@ public class ImpresionNodos extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabelLexico = new javax.swing.JLabel();
+        jLabelResultadoLexico = new javax.swing.JLabel();
+        jLabelSintaxis = new javax.swing.JLabel();
+        jLabelResultadoSintaxis = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,6 +54,14 @@ public class ImpresionNodos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jLabelLexico.setText("Lexico:");
+
+        jLabelResultadoLexico.setText(" ");
+
+        jLabelSintaxis.setText("Sintaxis:");
+
+        jLabelResultadoSintaxis.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -58,7 +69,13 @@ public class ImpresionNodos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelLexico)
+                    .addComponent(jLabelResultadoLexico)
+                    .addComponent(jLabelSintaxis)
+                    .addComponent(jLabelResultadoSintaxis))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,6 +83,16 @@ public class ImpresionNodos extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jLabelLexico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelResultadoLexico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelSintaxis)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelResultadoSintaxis)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -107,16 +134,37 @@ public class ImpresionNodos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelLexico;
+    private javax.swing.JLabel jLabelResultadoLexico;
+    private javax.swing.JLabel jLabelResultadoSintaxis;
+    private javax.swing.JLabel jLabelSintaxis;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
     void addnodo(String lexema, int token, int num_renglon) {
-
+        
         Object[] row = {lexema, token, num_renglon};
-
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+        
         model.addRow(row);
+    }
+
+    void LexicoResult(boolean correcto) {
+        if (correcto) {
+            jLabelResultadoLexico.setText("Correcto");
+        } else {
+            jLabelResultadoLexico.setText("Incorrecto");
+        }
+        
+    }
+    void SintaxisResult(boolean correcto) {
+        if (correcto) {
+            jLabelResultadoSintaxis.setText("Correcto");
+        } else {
+            jLabelResultadoSintaxis.setText("Incorrecto");
+        }
+        
     }
 }

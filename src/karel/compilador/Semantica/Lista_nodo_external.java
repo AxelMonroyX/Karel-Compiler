@@ -58,7 +58,7 @@ public class Lista_nodo_external {
         if (Lista_nodo_externalVacia()) {
             System.out.println("La " + Nom + " esta vacia");
         }
-
+        System.out.println("Lexema"+"\t"+"Parametro"+"\t"+"Using");
         while (Actual != null) {
             System.out.print(Actual.lexema);
             System.out.print("\t");

@@ -51,23 +51,29 @@ public class KarelCompilador {
             } else {
                 System.out.println("Imprimir nodo: \t\t\t" + _Lexico.p.lexema + " \t\t\t\t\t" + _Lexico.p.token + " \t\t" + _Lexico.p.num_renglon);
                 _ImpresionNodos.addnodo(_Lexico.p.lexema, _Lexico.p.token, _Lexico.p.num_renglon);
-
+                
             }
             
             _Lexico.p = _Lexico.p.sig;
         }
-
-
+        
         if (!_Lexico.error_encontrado) {
             _ImpresionNodos.setTitle("Lexico Correcto");
             _ImpresionNodos.setVisible(true);
-            JOptionPane.showMessageDialog(null, "Lexico Correcto");
+            //JOptionPane.showMessageDialog(null, "Lexico Correcto");
             System.out.println("\033[32mLEXICO TERMINADO");
             Sintaxis _Sintaxis = new Sintaxis(_Lexico.cabeza);
+            _ImpresionNodos.LexicoResult(true);
+            if (_Sintaxis.error_encontrado) {
+                _ImpresionNodos.SintaxisResult(false);
+            } else {
+                _ImpresionNodos.SintaxisResult(true);
+            }
         }
         if (_Lexico.error_encontrado) {
             System.out.println("LEXICO NO TERMINADO");
             System.out.println("\033[31mLEXICO NO TERMINADO");
+            _ImpresionNodos.LexicoResult(false);
         }
     }
     

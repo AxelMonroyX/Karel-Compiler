@@ -6,7 +6,7 @@ package karel.compilador;
 import javax.swing.JOptionPane;
 import karel.compilador.Semantica.Lista_nodo_define_new_instruction;
 import karel.compilador.Semantica.Lista_nodo_external;
-//import karel.compilador.Semantica.nodo_define_new_instruction;
+
 
 /**
  *
@@ -47,6 +47,7 @@ class Sintaxis {
         /*602*/ {"Verifica que la instrucción haya sido declarada anteriormente con define-new-instruction", "602"}
 
     };
+    boolean error_encontrado=true;
     Lista_nodo_define_new_instruction Lista_new_instructions = new Lista_nodo_define_new_instruction();
     Lista_nodo_external Lista_externals = new Lista_nodo_external();
 
@@ -57,8 +58,10 @@ class Sintaxis {
                 String color = "\u001B[31m";
                 String mensaje = ("Error:     " + errores[i][0] + "    " + errores[i][1] + "  EN EL RENGLON     " + p.num_renglon);
                 System.out.println(color + mensaje);
-                JOptionPane.showMessageDialog(null, mensaje, "Sintaxis", 1);
-                //error_encontrado=true;
+                //JOptionPane.showMessageDialog(null, mensaje, "Sintaxis", 1);
+               // error_encontrado=true;
+             
+                
             }
         }
 
@@ -70,9 +73,11 @@ class Sintaxis {
         //System.out.println("Primer Nodo: \t\t\t" + p.lexema + " \t\t" + p.token + " \t\t" + p.num_renglon);
         if (identificarProgramDeclaration()) {
             System.out.println("Sintaxis correcta");
-            JOptionPane.showMessageDialog(null, "Sintaxis Correcta");
+            error_encontrado=false;
+            //JOptionPane.showMessageDialog(null, "Sintaxis Correcta");
             //Lista_new_instructions.Mostrar();
             Lista_externals.Mostrar();
+            Lista_new_instructions.Mostrar();
         } else {
 
             JOptionPane.showMessageDialog(null, "Sintaxis Incorrecta");
